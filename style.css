@@ -17,8 +17,8 @@ body,
 #game-board {
     border-radius: 100px;
     display: grid;
-    grid-template-columns: repeat(20, 20px);
-    grid-template-rows: repeat(20, 20px);
+    grid-template-columns: repeat(30, 20px);
+    grid-template-rows: repeat(30, 20px);
     margin: 5px;
 }
 
@@ -41,7 +41,7 @@ body,
 
 #instruction-text {
     position: absolute;
-    top: 58%;
+    top: 60%;
     color: #333;
     width: 300px;
     text-align: center;
@@ -80,7 +80,7 @@ body,
 
 .food {
     background-color: #dedede;
-    border: #999 5px solid;
+    border: #999 3px solid;
 }
 
 #logo {
