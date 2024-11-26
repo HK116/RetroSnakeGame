@@ -1,0 +1,24 @@
+# macOS system files
+.DS_Store
+
+# Node.js dependencies (if you ever add Node.js to your project)
+node_modules/
+
+# IDE/editor files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Log files
+*.log
+
+# Build files
+dist/
+build/
+
+# Temporary files (e.g., for testing, backup, etc.)
+*.bak
+*.tmp
+*.swp
+*.swo
