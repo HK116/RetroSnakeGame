@@ -4,6 +4,8 @@ const instructionText = document.getElementById('instruction-text');
 const logo = document.getElementById('logo');
 const score = document.getElementById('score');
 const highScoreText = document.getElementById('highScore');
+const music = document.getElementById('background-music');
+const soundIcon = document.getElementById('sound-icon');
 
 
 // Define game variables
@@ -17,6 +19,7 @@ let gameInterval;
 let gameSpeedDelay = 200;
 const eatSound = new Audio('audio/eat-sound.mp3');
 const collisionSound = new Audio('audio/game-over.mp3')
+
 
 // Draw game map, snake, food
 function draw() {
@@ -117,10 +120,12 @@ function startGame() {
 // Keypress event listener
 function handleKeyPress(event) {
     if ( 
-        (!gameStarted && event.code === 'Space') || 
-        (!gameStarted && event.key === ' ') 
+        ((!gameStarted && event.code === 'Space') || 
+        (!gameStarted && event.key === ' ') ) && !music.playing
     ) {
         startGame();
+        music.play();
+        music.playing = true; // custom flag to track music state
     } else {
         switch (event.key) {
             case 'ArrowUp':
@@ -140,6 +145,17 @@ function handleKeyPress(event) {
 }
 
 document.addEventListener('keydown', handleKeyPress);
+
+// toggle mute/unmute
+soundIcon.addEventListener('click', () => {
+    if (music.muted) {
+        music.muted = false;
+        soundIcon.src = 'images/sound-on.png';
+    } else {
+        music.muted = true;
+        soundIcon.src = 'images/mute.png';
+    }
+});
 
 // Gradually increase the speed the snake moves at
 function increaseSpeed() {
@@ -182,6 +198,7 @@ function resetGame() {
     updateScore();
     updateHighScore();
     stopGame();
+    music.muted = true;
 }
 
 // Updates the score
