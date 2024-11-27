@@ -5,6 +5,7 @@ const logo = document.getElementById('logo');
 const score = document.getElementById('score');
 const highScoreText = document.getElementById('highScore');
 
+
 // Define game variables
 const GRID_SIZE = 30;
 let snake = [{x: 10, y:10}];
@@ -14,6 +15,8 @@ let highScore = 0;
 let direction = 'right';
 let gameInterval;
 let gameSpeedDelay = 200;
+const eatSound = new Audio('audio/eat-sound.mp3');
+const collisionSound = new Audio('audio/game-over.mp3')
 
 // Draw game map, snake, food
 function draw() {
@@ -83,6 +86,7 @@ function move() {
     snake.unshift(head);
     
     if (head.x === food.x && head.y === food.y) {
+        eatSound.play(); // Play sound on eating food
         food = generateFood(); // generate new food
         increaseSpeed();
         clearInterval(gameInterval); // clear past interval
@@ -157,11 +161,13 @@ function checkCollision() {
     if ( head.x < 1 || head.x > GRID_SIZE || 
         head.y < 1 || head.y > GRID_SIZE
     ) {
+        collisionSound.play(); // Play sound on collisioin with wall
         resetGame();
     }
 
     for (let i = 1; i < snake.length; i++) {
         if (head.x === snake[i].x && head.y === snake[i].y) {
+            collisionSound.play(); // Play sound on collisioin with wall
             resetGame();
         }
     }
